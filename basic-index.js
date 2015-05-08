@@ -29,14 +29,18 @@ app.get('/get-state', function (req, res) {
 
 });
 
-//app post routes
-
-app.post('/set-state', function(req, res){
-	console.log(req.body);
-	currentState = req.body ;
+//app post functions
+var setState = function(req, res){
+	for(var key in req.body){
+		currentState[key] = req.body[key] ;
+	}
 	console.log(currentState);
 	res.end('ok : ' + currentState);
-});
+};
 
+//app post routes
 
+app.post('/set-state', setState);
+
+// listen to port 3000
 app.listen(3000);
