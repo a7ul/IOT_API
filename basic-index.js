@@ -5,7 +5,9 @@ var bodyparser = require('body-parser');
 var app = express();
 var db = require('./db_control');
 
-var currentState = '0' ;
+var currentState = {
+	
+} ;
 
 // app use
 app.use(bodyparser.urlencoded({
@@ -23,14 +25,15 @@ app.set('view engine', 'jade');
 
 app.get('/get-state', function (req, res) {
 
-	res.end(currentState);
+	res.end(currentState[req.query.device]);
 
 });
 
 //app post routes
 
 app.post('/set-state', function(req, res){
-	currentState = req.body.state ;
+	console.log(req.body);
+	currentState = req.body ;
 	console.log(currentState);
 	res.end('ok : ' + currentState);
 });

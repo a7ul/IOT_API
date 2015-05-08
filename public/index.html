@@ -10,12 +10,22 @@
 			</select>
 			<input type="submit" value="Submit"></input>
 		</form>-->
-		<select name="state" id='state-options'>
+		<span>LED : </span>
+		<select name="state-led" id='state-options-led'>
+			<option value="1">On</option>
+			<option value="0">Off</option>
+		</select>
+		<br/>
+<!--		<input type="button" value="Submit" id='form-button'></input>-->
+		<span>Buzzer : </span>
+		<select name="state-buzzer" id='state-options-buzzer'>
 			<option value="1">On</option>
 			<option value="0">Off</option>
 		</select>
 		<input type="button" value="Submit" id='form-button'></input>
-			<span id="status"></span>
+		<span id="status"></span>
+		<span id="status"></span>
+			
 		<!-- <p> home</p>
 		<form method = 'post' action='/home'>
 			<input type='text' name='name'></input>
