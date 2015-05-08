@@ -47,45 +47,52 @@ app.get('/viewdevices', function (req, res) {
 
 });
 
+
+app.get('/receive', function(req, res){
+	
+	console.log(req.query.devKey);
+	
+});
+
 //app post routes
 
-app.post('/update', function (req, res) {
-
-	if (req.body.thing === 'light') {
-		data.light++;
-	}
-	if (req.body.thing === 'fan') {
-		data.fan++;
-	}
-
-	console.log(data);
-
-	res.end();
-
-});
-
-app.post('/new-user', function (req, res) {
-
-	db.users.save(req.body, function (err, saved) {
-		if (err || !saved) console.log("User not saved");
-		else console.log("User saved");
-	});
-
-	res.end('User Successfully signed up');
-
-});
-
-app.post('/home', function (req, res) {
-	db.users.find({}, function (err, users) {
-		var loginUser = _.filter(users, { name: req.body.name });
-		if (loginUser.length === 1 && loginUser[0].password === req.body.password) {
-			res.render('viewdevices', { fan: data.fan });
-		}
-		else {
-			res.end('Wrong login');
-		}
-	});
-});
+//app.post('/update', function (req, res) {
+//
+//	if (req.body.thing === 'light') {
+//		data.light++;
+//	}
+//	if (req.body.thing === 'fan') {
+//		data.fan++;
+//	}
+//
+//	console.log(data);
+//
+//	res.end();
+//
+//});
+//
+//app.post('/new-user', function (req, res) {
+//
+//	db.users.save(req.body, function (err, saved) {
+//		if (err || !saved) console.log("User not saved");
+//		else console.log("User saved");
+//	});
+//
+//	res.end('User Successfully signed up');
+//
+//});
+//
+//app.post('/home', function (req, res) {
+//	db.users.find({}, function (err, users) {
+//		var loginUser = _.filter(users, { name: req.body.name });
+//		if (loginUser.length === 1 && loginUser[0].password === req.body.password) {
+//			res.render('viewdevices', { fan: data.fan });
+//		}
+//		else {
+//			res.end('Wrong login');
+//		}
+//	});
+//});
 
 //temporary scripts
 
@@ -94,12 +101,12 @@ app.post('/home', function (req, res) {
 //	else console.log("User saved");
 //});
 //
-db.users.find({}, function (err, users) {
-	if (err || !users) console.log("No users found");
-	else users.forEach(function (femaleUser) {
-		console.log(femaleUser);
-	});
-});
+//db.users.find({}, function (err, users) {
+//	if (err || !users) console.log("No users found");
+//	else users.forEach(function (femaleUser) {
+//		console.log(femaleUser);
+//	});
+//});
 //
 //db.users.remove({}, function (err, docs) {
 //	if (err) return err;
