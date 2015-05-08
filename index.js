@@ -64,13 +64,24 @@ app.post('/update', function (req, res) {
 
 });
 
+app.post('/new-user', function (req, res) {
+
+	db.users.save(req.body, function (err, saved) {
+		if (err || !saved) console.log("User not saved");
+		else console.log("User saved");
+	});
+
+	res.end('User Successfully signed up');
+
+});
+
 app.post('/home', function (req, res) {
 	db.users.find({}, function (err, users) {
-		var loginUser = _.filter(users, { name: req.body.name }) ; 
-		if (loginUser.length === 1 && loginUser[0].password === req.body.password ) {
+		var loginUser = _.filter(users, { name: req.body.name });
+		if (loginUser.length === 1 && loginUser[0].password === req.body.password) {
 			res.render('viewdevices', { fan: data.fan });
 		}
-		else{
+		else {
 			res.end('Wrong login');
 		}
 	});
@@ -84,7 +95,7 @@ app.post('/home', function (req, res) {
 //});
 //
 db.users.find({}, function (err, users) {
-	if (err || !users) console.log("No female users found");
+	if (err || !users) console.log("No users found");
 	else users.forEach(function (femaleUser) {
 		console.log(femaleUser);
 	});
