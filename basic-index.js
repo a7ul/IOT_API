@@ -32,7 +32,7 @@ app.get('/get-state', function (req, res) {
 app.post('/set-state', function(req, res){
 	currentState = req.body.state ;
 	console.log(currentState);
-	res.end('ok');
+	res.end('ok : ' + currentState);
 });
 
 
