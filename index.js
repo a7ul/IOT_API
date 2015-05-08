@@ -4,6 +4,7 @@ var path = require('path');
 var bodyparser = require('body-parser');
 var app = express();
 var db = require('./db_control');
+var _ = require('lodash');
 var data = {
 	light: 0,
 	fan: 0
@@ -63,23 +64,35 @@ app.post('/update', function (req, res) {
 
 });
 
+app.post('/home', function (req, res) {
+	db.users.find({}, function (err, users) {
+		var loginUser = _.filter(users, { name: req.body.name }) ; 
+		if (loginUser.length === 1 && loginUser[0].password === req.body.password ) {
+			res.render('viewdevices', { fan: data.fan });
+		}
+		else{
+			res.end('Wrong login');
+		}
+	});
+});
+
 //temporary scripts
 
-db.users.save({ email: "srirangan@gmail.com", password: "iLoveMongo", sex: "male" }, function (err, saved) {
-	if (err || !saved) console.log("User not saved");
-	else console.log("User saved");
+//db.users.save({ name: "meenakshi", password: "meenakshi123", sex: "male" }, function (err, saved) {
+//	if (err || !saved) console.log("User not saved");
+//	else console.log("User saved");
+//});
+//
+db.users.find({}, function (err, users) {
+	if (err || !users) console.log("No female users found");
+	else users.forEach(function (femaleUser) {
+		console.log(femaleUser);
+	});
 });
-
-db.users.find({}, function(err, users) {
-  if( err || !users) console.log("No female users found");
-  else users.forEach( function(femaleUser) {
-    console.log(femaleUser);
-  } );
-});
-
-db.users.remove({}, function(err, docs) {
-        if (err) return err;
-        console.log(docs);
-    });
+//
+//db.users.remove({}, function (err, docs) {
+//	if (err) return err;
+//	console.log(docs);
+//});
 
 app.listen(3000);
