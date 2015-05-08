@@ -4,11 +4,8 @@ var path = require('path');
 var bodyparser = require('body-parser');
 var app = express();
 var db = require('./db_control');
-var _ = require('lodash');
-var data = {
-	light: 0,
-	fan: 0
-};
+
+var currentState = '0' ;
 
 // app use
 app.use(bodyparser.urlencoded({
@@ -26,11 +23,17 @@ app.set('view engine', 'jade');
 
 app.get('/get-state', function (req, res) {
 
-	res.end('1');
+	res.end(currentState);
 
 });
 
+//app post routes
 
+app.post('/set-state', function(req, res){
+	currentState = req.body.state ;
+	console.log(currentState);
+	res.end('ok');
+});
 
 
 app.listen(3000);

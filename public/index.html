@@ -1,20 +1,21 @@
 <html>
 	<head>
-		<title>
-			IOT
-		</title>
+		<title>IOT</title>
 	</head>
-	
 	<body>
-		<form method = 'post' action='/update'>
-			<input type='text' name='thing'></input>
+		<form method='post' action='/set-state'>
+			<select name="state">
+				<option value="1">On</option>
+				<option value="0">Off</option>
+			</select>
 			<input type="submit" value="Submit"></input>
 		</form>
-		<p> home</p>
+		<!-- <p> home</p>
 		<form method = 'post' action='/home'>
 			<input type='text' name='name'></input>
 			<input type='text' name='password'></input>
 			<input type="submit" value="Submit"></input>
-		</form>
+		</form>-->
 	</body>
+
 </html>
